@@ -342,8 +342,12 @@ function fetchAndVisualizeData() {
   
   function topEconomicalBoweler(eco) {
     let seriesData = [];
-    for (let e in eco) {
-      seriesData.push([e, eco[e]]);
+    for (let [key, value] of Object.entries(eco)) {
+      if(key === "2015"){
+        for(let [k, v] of Object.entries(value)){
+          seriesData.push([k, v]);
+        }
+      }
     }
     seriesData.sort(function(a, b){
       return a[1] - b[1];
@@ -355,6 +359,72 @@ function fetchAndVisualizeData() {
       },
       title: {
         text: "4. Top economical bowlers in 2015 Season"
+      },
+      subtitle: {
+        text:
+          'Source: <a href="https://www.kaggle.com/nowke9/ipldata/data">IPL Dataset</a>'
+      },
+      xAxis: {
+        type: "category"
+      },
+      yAxis: {
+        min: 0,
+        title: {
+          text: "Matches"
+        }
+      },
+      series: [
+        {
+          name: "Economy rate",
+          data: ecoData
+        }
+      ]
+    });
+  }
+  
+  function start(){
+    document.querySelector(".year-input-button").addEventListener("click", userInput)
+  }
+  start();
+
+  var year = "";
+  function userInput(){
+    var input = document.querySelector(".year-input").value;
+    year = input;
+    if(parseInt(input) < 2008 || parseInt(input) > 2019){
+      document.querySelector(".input-container > .error").classList.value="error";
+    }else{
+      document.querySelector(".input-container > .error").classList="error invisible";
+      fetch("./data.json")
+      .then(r => r.json())
+      .then(visualizeSeasonalEconomy);
+    }
+  }
+
+  function visualizeSeasonalEconomy(data){
+    seasonEconomy(year, data.eco);
+    return;
+  }
+
+  function seasonEconomy(input, eco){
+    let seriesData = [];
+    for (let [key, value] of Object.entries(eco)) {
+      if(key === input){
+        for(let [k, v] of Object.entries(value)){
+          seriesData.push([k, v]);
+        }
+      }
+    }
+    seriesData.sort(function(a, b){
+      return a[1] - b[1];
+    });
+    let ecoData = seriesData.slice(0, 10);
+    Highcharts.chart("custom-eco", {
+      chart: {
+        type: "column"
+      },
+      title: {
+        text: "Top economical bowlers in "+input+" Season"
       },
       subtitle: {
         text:
