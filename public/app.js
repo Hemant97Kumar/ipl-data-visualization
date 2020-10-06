@@ -48,10 +48,9 @@ function fetchAndVisualizeData() {
     });
   }
   
-  var teamss = [];
+  var teams = [];
   function visualizeMatchesWonByEachTeam(matchesWonByEachTeam) {  
     const seriesData = [];
-    let teams = [];
     for (let [key, value] of Object.entries(matchesWonByEachTeam)){
       seriesData.push(key);
       for(let [k, v] of Object.entries(value)){
@@ -63,7 +62,6 @@ function fetchAndVisualizeData() {
         }
       }
     }
-    teamss.push(...teams);
     const winData = [];
     for (let team of teams) {
       if(team === "noResult"){
@@ -240,67 +238,67 @@ function fetchAndVisualizeData() {
       },
       series: [
         {
-          name: teamss[0],
+          name: teams[0],
           data: winData[0]
         },
         {
-          name: teamss[1],
+          name: teams[1],
           data: winData[1]
         },
         {
-          name: teamss[2],
+          name: teams[2],
           data: winData[2]
         },
         {
-          name: teamss[3],
+          name: teams[3],
           data: winData[3]
         },
         {
-          name: teamss[4],
+          name: teams[4],
           data: winData[4]
         },
         {
-          name: teamss[5],
+          name: teams[5],
           data: winData[5]
         },
         {
-          name: teamss[6],
+          name: teams[6],
           data: winData[6]
         },
         {
-          name: teamss[7],
+          name: teams[7],
           data: winData[7]
         },
         {
-          name: teamss[8],
+          name: teams[8],
           data: winData[8]
         },
         {
-          name: teamss[9],
+          name: teams[9],
           data: winData[9]
         },
         {
-          name: teamss[10],
+          name: teams[10],
           data: winData[10]
         },
         {
-          name: teamss[11],
+          name: teams[11],
           data: winData[11]
         },
         {
-          name: teamss[12],
+          name: teams[12],
           data: winData[12]
         },
         {
-          name: teamss[13],
+          name: teams[13],
           data: winData[13]
         },
         {
-          name: teamss[14],
+          name: teams[14],
           data: winData[14]
         },
         {
-          name: teamss[15],
+          name: teams[15],
           data: winData[15]
         }
       ]});
