@@ -5,6 +5,11 @@ const matchesWonByEachTeam = require("./ipl/matchesWonByEachTeam");
 const extraRunByEachTeam = require("./ipl/extraRunByEachTeam");
 const topEconomicalBowler = require("./ipl/topEconomicalBowler");
 const story = require("./ipl/story");
+const express = require('express');
+
+const app = express();
+app.use(express.static(__dirname + "/public"));
+
 
 const MATCHES_FILE_PATH = "./csv_data/matches.csv";
 const DELIVERIES_FILE_PATH = "./csv_data/deliveries.csv";
@@ -43,3 +48,6 @@ function saveData(arr1, arr2) {
   });
 }
 main();
+
+const port = process.env.PORT || 3000;
+app.listen(port, () => console.log(`listning to ${port}`));

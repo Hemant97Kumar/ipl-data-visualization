@@ -384,33 +384,23 @@ function start(){
 }
 start();
 
-var year = "";
 function userInput(){
-  var input = document.querySelector(".year-input").value;
-  year = input;
-  if(parseInt(input) < 2008 || parseInt(input) > 2019){
-    document.querySelector(".input-container > .error").classList.value="error";
-  }else{
-    document.querySelector(".input-container > .error").classList="error invisible";
-    fetch("./data.json")
-    .then(r => r.json())
-    .then(visualizeSeasonalEconomy);
-  }
-}
-
-function visualizeSeasonalEconomy(data){
-  seasonEconomy(year, data.eco);
-  return;
+  var input = document.querySelector(".year-input").value; 
+	(input = parseInt(input)) < 2008 || 2019 < input ? document.querySelector(".input-container > .error").classList.value="error" 
+	: (document.querySelector(".input-container > .error").classList="error invisible",
+	   fetch("./data.json")
+		.then(r => r.json())
+		.then(function (e) {
+			document.querySelector("#custom-eco").innerHTML="",
+			seasonEconomy(input, e.eco[input])
+		})
+	)
 }
 
 function seasonEconomy(input, eco){
   let seriesData = [];
   for (let [key, value] of Object.entries(eco)) {
-    if(key === input){
-      for(let [k, v] of Object.entries(value)){
-        seriesData.push([k, v]);
-      }
-    }
+    seriesData.push([key, value]);
   }
   seriesData.sort(function(a, b){
     return a[1] - b[1];
