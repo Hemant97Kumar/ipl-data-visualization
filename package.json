@@ -4,7 +4,7 @@
   "description": "IPL data visualization",
   "main": "index.js",
   "scripts": {
-    "ipl": "node index.js",
+    "ipl": "node express-server.js",
     "start": "http-server"
   },
   "keywords": [],
