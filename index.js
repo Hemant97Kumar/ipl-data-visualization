@@ -1,5 +1,6 @@
 const fs = require("fs");
 const csv = require("csvtojson");
+const express = require('express');
 const matchesPlayedPerYear = require("./ipl/matchesPlayedPerYear");
 const matchesWonByEachTeam = require("./ipl/matchesWonByEachTeam");
 const extraRunByEachTeam = require("./ipl/extraRunByEachTeam");
@@ -9,6 +10,10 @@ const story = require("./ipl/story");
 const MATCHES_FILE_PATH = "./csv_data/matches.csv";
 const DELIVERIES_FILE_PATH = "./csv_data/deliveries.csv";
 const JSON_OUTPUT_FILE_PATH = "./public/data.json";
+
+const app = express();
+app.use(express.static('public'));
+app.listen(3000, () => console.log('app listening on port 3000!'));
 
 function main() {
   csv()
