@@ -190,7 +190,7 @@ function fetchAndVisualizeData() {
       stadium.push(key);
     }
     const winData = [];
-    for (let team of teamss) {
+    for (let team of teams) {
       if(team === "noResult"){
         team ="";
       }
